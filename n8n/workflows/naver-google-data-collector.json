@@ -1,0 +1,138 @@
+{
+  "name": "Naver + Google Keyword Collector (KR)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        220,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openapi.naver.com/v1/datalab/search",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Naver-Client-Id",
+              "value": "={{$env.NAVER_CLIENT_ID}}"
+            },
+            {
+              "name": "X-Naver-Client-Secret",
+              "value": "={{$env.NAVER_CLIENT_SECRET}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"startDate\": $now.minus({ days: 7 }).toFormat('yyyy-MM-dd'), \"endDate\": $now.toFormat('yyyy-MM-dd'), \"timeUnit\": \"date\", \"keywordGroups\": [ { \"groupName\": \"기본키워드\", \"keywords\": [\"AI\", \"n8n\", \"자동화\"] } ] } }}",
+        "options": {}
+      },
+      "id": "naver-trend-api",
+      "name": "Naver Trend API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const payload = $json;\nreturn [\n  {\n    json: {\n      source: 'naver-datalab',\n      collectedAt: new Date().toISOString(),\n      payload,\n    },\n  },\n];"
+      },
+      "id": "format-naver-data",
+      "name": "Format Naver Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://trends.google.com/trends/trendingsearches/daily/rss?geo=KR"
+      },
+      "id": "google-trending-rss",
+      "name": "Google Trending RSS",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        520,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map((item) => ({\n  json: {\n    source: 'google-trends-rss',\n    collectedAt: new Date().toISOString(),\n    keyword: item.json.title,\n    traffic: item.json['ht:approx_traffic'],\n    link: item.json.link,\n    pubDate: item.json.pubDate,\n    raw: item.json,\n  },\n}));"
+      },
+      "id": "format-google-data",
+      "name": "Format Google Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        380
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Naver Trend API",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Trending RSS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Naver Trend API": {
+      "main": [
+        [
+          {
+            "node": "Format Naver Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Trending RSS": {
+      "main": [
+        [
+          {
+            "node": "Format Google Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

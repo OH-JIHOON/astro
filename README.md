@@ -60,3 +60,17 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 ## Credit
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+
+## n8n 데이터 수집 워크플로우
+
+`/home/runner/work/astro/astro/n8n/workflows/naver-google-data-collector.json` 파일에
+네이버 데이터랩 트렌드와 구글 트렌딩 키워드를 수집하는 n8n 워크플로우를 추가했습니다.
+
+### 사용 방법
+
+1. n8n에서 **Import from File**로 위 JSON 파일을 불러옵니다.
+2. n8n 실행 환경에 아래 환경 변수를 설정합니다.
+   - `NAVER_CLIENT_ID`
+   - `NAVER_CLIENT_SECRET`
+3. `Naver Trend API` 노드의 `keywords` 값을 원하는 수집 키워드로 수정합니다.
+4. `Manual Trigger`로 실행해 네이버/구글 데이터 수집 결과를 확인합니다.
