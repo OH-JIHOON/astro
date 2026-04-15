@@ -63,7 +63,7 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 
 ## n8n 데이터 수집 워크플로우
 
-`/home/runner/work/astro/astro/n8n/workflows/naver-google-data-collector.json` 파일에
+`n8n/workflows/naver-google-data-collector.json` 파일에
 네이버 데이터랩 트렌드와 구글 트렌딩 키워드를 수집하는 n8n 워크플로우를 추가했습니다.
 
 ### 사용 방법
