@@ -72,5 +72,5 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 2. n8n 실행 환경에 아래 환경 변수를 설정합니다.
    - `NAVER_CLIENT_ID`
    - `NAVER_CLIENT_SECRET`
-3. `Naver Trend API` 노드의 `keywords` 값을 원하는 수집 키워드로 수정합니다.
+3. `Build Naver Request Body` 노드의 `keywords` 값을 원하는 수집 키워드로 수정합니다.
 4. `Manual Trigger`로 실행해 네이버/구글 데이터 수집 결과를 확인합니다.
