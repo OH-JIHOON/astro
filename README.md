@@ -72,7 +72,7 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 2. n8n 실행 환경에 아래 환경 변수를 설정합니다.
    - `NAVER_CLIENT_ID`
    - `NAVER_CLIENT_SECRET`
-3. `Build Naver Request Body` 노드의 JavaScript 코드에서 `keywords` 값을 원하는 수집 키워드로 수정합니다. (`['키워드1', '키워드2']` 형태의 JS 문자열 배열)
+3. `Build Naver Request Body` 노드의 JavaScript 코드에서 `keywords` 값을 원하는 수집 키워드로 수정합니다. (`['키워드1', '키워드2']` 형태의 JavaScript 배열)
 4. 초기 import 단계에서는 JSON 파일을 그대로 사용합니다.
-5. import 이후 `Build Naver Request Body`, `Format Naver Data`, `Format Google Data`의 스크립트 수정은 n8n export JSON의 이스케이프 문자열로 인한 문법 오류를 피하기 위해 JSON 직접 편집 대신 n8n UI에서 진행합니다.
+5. import 이후 `Build Naver Request Body`, `Format Naver Data`, `Format Google Data`의 스크립트 수정은 수동 이스케이프 관리를 줄이기 위해 JSON 직접 편집 대신 n8n UI에서 진행합니다.
 6. `Manual Trigger`로 실행해 네이버/구글 데이터 수집 결과를 확인합니다.
