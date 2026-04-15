@@ -73,5 +73,5 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
    - `NAVER_CLIENT_ID`
    - `NAVER_CLIENT_SECRET`
 3. `Build Naver Request Body` 노드의 `keywords` 값을 원하는 수집 키워드로 수정합니다.
-4. `Manual Trigger`로 실행해 네이버/구글 데이터 수집 결과를 확인합니다.
-5. `Code` 노드의 스크립트는 JSON을 직접 편집하지 마시고, 이스케이프 오류를 피하기 위해 n8n UI에서 수정합니다.
+4. `Code` 노드의 스크립트는 JSON을 직접 편집하지 마시고, 이스케이프 오류를 피하기 위해 n8n UI에서 수정합니다.
+5. `Manual Trigger`로 실행해 네이버/구글 데이터 수집 결과를 확인합니다.
